@@ -1,24 +1,22 @@
 {
-  "name": "spring-data-rest-and-reactjs",
-  "version": "0.1.0",
-  "description": "Demo of ReactJS + Spring Data REST",
+  "name": "java-react",
+  "version": "0.1.1",
+  "description": "Basic Java and React.js setup",
   "repository": {
     "type": "git",
-    "url": "git@github.com:spring-guides/tut-react-and-spring-data-rest.git"
+    "url": "git@github.com:sergioh213/java-react.git"
   },
   "keywords": [
-    "rest",
-    "hateoas",
     "spring",
-    "data",
-    "react"
+    "react",
+    "java"
   ],
-  "author": "Greg L. Turnquist",
-  "license": "Apache-2.0",
+  "author": "Sergio Herrero",
+  "license": "",
   "bugs": {
-    "url": "https://github.com/spring-guides/tut-react-and-spring-data-rest/issues"
+    "url": "https://github.com/sergioh213/java-react"
   },
-  "homepage": "https://github.com/spring-guides/tut-react-and-spring-data-rest",
+  "homepage": "https://github.com/sergioh213/java-react",
   "dependencies": {
     "react": "^16.5.2",
     "react-dom": "^16.5.2",

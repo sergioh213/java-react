@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import Logo from './Logo';
+import Logo from '../Logo/Logo';
+import CommandLine from '../CommandLine/CommandLine';
 
 const Page = styled.div`
 	height: 100vh;
@@ -19,13 +19,18 @@ const ContentArea = styled.div`
 	width: 100%;
 	background-color: #F0F0F0;
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	align-items: center;
+	padding: 30px 0px;
 `;
 const Grid = styled.div`
 	height: 80%;
 	width: 80%;
 	background-color: white;
+
+	@media only screen and (max-width: 495px) {
+    width: 100vw;
+  }
 `;
 const Footer = styled.div`
 
@@ -68,6 +73,7 @@ class App extends React.Component {
 							<div>{'Y: ' + coordinates.y}</div>
 						</Grid>
 					}
+					<CommandLine />
 				</ContentArea>
 
 				<Footer>
@@ -79,7 +85,4 @@ class App extends React.Component {
 	}
 }
 
-ReactDOM.render(
-	<App />,
-	document.getElementById('react')
-);
+export default App;
