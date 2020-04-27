@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import Logo from './Logo';
 
 const Page = styled.div`
 	height: 100vh;
@@ -12,7 +13,6 @@ const NavBar = styled.div`
 	background-color: #0A3761;
 	display: flex;
 	justify-content: center;
-	height: 42px;
 `;
 const ContentArea = styled.div`
 	height: 100%;
@@ -58,10 +58,11 @@ class App extends React.Component {
 		return (
 			<Page>
 				<NavBar>
+					<Logo />
 				</NavBar>
 
 				<ContentArea>
-					{coordinates && 
+					{coordinates &&
 						<Grid>
 							<div>{'X: ' + coordinates.x}</div>
 							<div>{'Y: ' + coordinates.y}</div>
