@@ -32,10 +32,6 @@ const Button = styled.button`
     border: 0px;
     cursor: pointer;
 `;
-const InputWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
 const Input = styled.input`
   background-color: #fff;
   border-radius: 2px;
@@ -58,17 +54,62 @@ const SubmitButton = styled.button`
     width: 20%;
 `;
 
-const CommandLine = () => {
+const initialCommands = [
+  {
+    // sets the position of the robot, pointing east
+    action: 'POSITION',
+    coordinates: {
+      x: 1,
+      y: 2,
+    }
+  },
+  {
+    // sets the robot pointing east
+    action: 'EAST',
+  },
+  {
+    // lets the robot do 3 steps forward
+    action: 'FORWARD',
+    value: 3
+  },
+  {
+    // lets the robot do nothing
+    action: 'WAIT',
+  },
+  {
+    // lets the robot turn around
+    action: 'TURNAROUND',
+  },
+  {
+    // lets the robot do 1 step forward
+    action: 'FORWARD',
+    value: 1
+  },
+  {
+    // lets the robot turn right
+    action: 'RIGHT',
+  },
+  {
+    // lets the robot do 2 steps forward
+    action: 'FORWARD',
+    value: 2
+  }
+];
+
+const CommandLine = ({ onSubmit }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [commands, setCommands] = useState(initialCommands);
 
   const toggleIsOpen = () => setIsOpen(!isOpen);
+
+  const handleSubmit = () => onSubmit(commands);
 
   return (
     <Wrapper>
       {isOpen && (
         <ButtonWrapper>
           <Input />
-          <SubmitButton>Submit</SubmitButton>
+          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
         </ButtonWrapper>
       )}
       {!isOpen && <ButtonWrapper><Button onClick={toggleIsOpen}>Give commands</Button></ButtonWrapper>}

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Logo from '../Logo/Logo';
 import CommandLine from '../CommandLine/CommandLine';
 import Grid from '../Grid/Grid';
+import axios from 'axios';
 
 const Page = styled.div`
 	height: 100vh;
@@ -36,49 +37,6 @@ const BottomStripe = styled.div`
 	height: 90px;
 `;
 
-const initialCommands = [
-	{
-		// sets the position of the robot, pointing east
-		action: 'POSITION',
-		coordinates: {
-			x: 1,
-			y: 2,
-		}
-	},
-	{
-		// sets the robot pointing east
-		action: 'EAST',
-	},
-	{
-		// lets the robot do 3 steps forward
-		action: 'FORWARD',
-		value: 3
-	},
-	{
-		// lets the robot do nothing
-		action: 'WAIT',
-		value: null
-	},
-	{
-		// lets the robot turn around
-		action: 'TURNAROUND',
-	},
-	{
-		// lets the robot do 1 step forward
-		action: 'FORWARD',
-		value: 1
-	},
-	{
-		// lets the robot turn right
-		action: 'RIGHT',
-	},
-	{
-		// lets the robot do 2 steps forward
-		action: 'FORWARD',
-		value: 2
-	}
-];
-
 const gridSize = {
 	columns: 5,
 	rows: 5
@@ -90,7 +48,6 @@ class App extends React.Component {
 		super(props);
 
 		this.state = {
-			commands: initialCommands,
 			data: {
 				rotation: 90,
 				coordinates: {
@@ -99,23 +56,21 @@ class App extends React.Component {
 				}
 			}
 		};
+
+		this.submitCommands = this.submitCommands.bind(this);
 	}
 
 	componentDidMount() {
-		fetch('/api/coordinates').then(response => response.json())
-			.then(data => this.setState({
-				data: {
-					rotation: 90,
-					coordinates: {
-						x: 1,
-						y: 3
-					}
-				}
-			}));
+		// fetch('/api/position').then(response => response.json())
+		// 	.then(data => this.setState({ data }));
+		axios.get('/api/position')
+			.then(({ data }) => this.setState({ data }));
 	}
 
-	submitCommands() {
-
+	submitCommands(commands) {
+		debugger;
+		axios.post('/api/commands', commands)
+			.then(({ data }) => this.setState({ data }));
 	}
 
 	render() {
@@ -132,7 +87,7 @@ class App extends React.Component {
 						numberOfColumns={gridSize.columns}
 						numberOfRows={gridSize.rows}
 					/>
-					<CommandLine />
+					<CommandLine onSubmit={this.submitCommands}/>
 				</ContentArea>
 
 				<Footer>

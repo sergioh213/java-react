@@ -2,13 +2,24 @@ package com.sergioHerrero.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+
+class Command {
+	public String action;
+	public Coordinates coordinates;
+	public int value;
+}
 
 class Coordinates {
 	public int x = 1;
 	public int y = 2;
+}
+
+class Position {
+	public Coordinates coordinates = new Coordinates();
+	public int rotation = 0;
 }
 
 @SpringBootApplication
@@ -19,15 +30,16 @@ public class MainApplication {
 		SpringApplication.run(MainApplication.class, args);
 	}
 
-	@GetMapping("/api/coordinates")
-	public Coordinates readCoordinates() {
-		Coordinates defaultCoordinates= new Coordinates();
-		return defaultCoordinates;
+	public Position position = new Position();
+
+	@GetMapping("/api/position")
+	public Position getPosition() {
+		return this.position;
 	}
 
-//	@PostMapping(path = "/pets", consumes = "application/json")
-//	public void executeCommand(@RequestBody Command command) {
-//		// ...
-//	}
+	@PostMapping(path = "/api/commands", consumes = "application/json")
+	public Position postCommands(@RequestBody ArrayList<Command> commands) {
+		return this.position;
+	}
 
 }
