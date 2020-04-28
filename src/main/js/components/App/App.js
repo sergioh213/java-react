@@ -36,22 +36,90 @@ const BottomStripe = styled.div`
 	height: 90px;
 `;
 
+const initialCommands = [
+	{
+		// sets the position of the robot, pointing east
+		action: 'POSITION',
+		coordinates: {
+			x: 1,
+			y: 2,
+		}
+	},
+	{
+		// sets the robot pointing east
+		action: 'EAST',
+	},
+	{
+		// lets the robot do 3 steps forward
+		action: 'FORWARD',
+		value: 3
+	},
+	{
+		// lets the robot do nothing
+		action: 'WAIT',
+		value: null
+	},
+	{
+		// lets the robot turn around
+		action: 'TURNAROUND',
+	},
+	{
+		// lets the robot do 1 step forward
+		action: 'FORWARD',
+		value: 1
+	},
+	{
+		// lets the robot turn right
+		action: 'RIGHT',
+	},
+	{
+		// lets the robot do 2 steps forward
+		action: 'FORWARD',
+		value: 2
+	}
+];
+
+const gridSize = {
+	columns: 5,
+	rows: 5
+}
+
 class App extends React.Component {
 
 	constructor(props) {
 		super(props);
+
 		this.state = {
-			coordinates: null
+			commands: initialCommands,
+			data: {
+				rotation: 90,
+				coordinates: {
+					x: 1,
+					y: 1
+				}
+			}
 		};
 	}
 
 	componentDidMount() {
 		fetch('/api/coordinates').then(response => response.json())
-			.then(coordinates => this.setState({ coordinates }));
+			.then(data => this.setState({
+				data: {
+					rotation: 90,
+					coordinates: {
+						x: 1,
+						y: 3
+					}
+				}
+			}));
+	}
+
+	submitCommands() {
+
 	}
 
 	render() {
-		const { coordinates } = this.state;
+		const { data } = this.state;
 		return (
 			<Page>
 				<NavBar>
@@ -59,7 +127,11 @@ class App extends React.Component {
 				</NavBar>
 
 				<ContentArea>
-					<Grid coordinates={coordinates} />
+					<Grid
+						data={data}
+						numberOfColumns={gridSize.columns}
+						numberOfRows={gridSize.rows}
+					/>
 					<CommandLine />
 				</ContentArea>
 

@@ -4,10 +4,22 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 50px;
+  height: 50px;
+
+  ${({ rotation = 0 }) => `
+    transform:rotate(${rotation}deg);
+    -ms-transform:rotate(${rotation}deg);
+    -webkit-transform:rotate(${rotation}deg);
+  `}
+
+  -webkit-transition: -webkit-transform .1s ease-in-out;
+  -ms-transition: -ms-transform 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+
 `;
 
-const Robot = () => (
-  <Wrapper>
+const Robot = ({ rotation }) => (
+  <Wrapper rotation={rotation} >
     <svg version="1.1" x="0px" y="0px" viewBox="0 0 392.533 392.533">
       <g>
         <g>

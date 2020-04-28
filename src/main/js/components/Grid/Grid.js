@@ -18,7 +18,6 @@ const Wrapper = styled.div`
 const InternalGridLayout = styled.div`
   display: grid;
   grid-template-columns: 5fr;
-  // grid-template-rows: 5fr;
 `;
 const GridElement = styled.div`
   width: 50px;
@@ -32,47 +31,38 @@ const GridElement = styled.div`
   grid-row: ${({ row }) => row};
 `;
 
+const Grid = ({ data, numberOfRows, numberOfColumns }) => (
+  <Wrapper>
+    <InternalGridLayout numberOfRows={numberOfRows} numberOfColumns={numberOfColumns}>
+      {
+        // The operation below generates an array with N amount of items.
+        // We do it twice, once to generate an array for the rows, and one for the columns
+        Array.apply(null, Array(numberOfRows)).map((_, rowIndex) =>
+          Array.apply(null, Array(numberOfColumns)).map((_, columnIndex) => (
 
-const CommandLine = ({ data }) => {
-  const [isOpen, setIsOpen] = useState(false);
+            <GridElement
 
-  const toggleIsOpen = () => setIsOpen(!isOpen);
+              // Creates a unique number for every grid element
+              key={columnIndex + (rowIndex * numberOfRows)}
 
-  return (
-    <Wrapper>
-      <InternalGridLayout>
-        <GridElement column={1} row={1} />
-        <GridElement column={2} row={1} ><Robot /></GridElement>
-        <GridElement column={3} row={1} />
-        <GridElement column={4} row={1} />
-        <GridElement column={5} row={1} />
+              // We pass the number of the column and row to the css styling
+              // to determine its placement in the DOM with 'display: grid'
+              column={columnIndex + 1}
+              row={rowIndex + 1}
+            >
+              { // checks if the current grid element should contain the robot
+                ((data.coordinates.x === columnIndex + 1) &&
+                  (data.coordinates.y === rowIndex + 1)) && (
+                    <Robot rotation={data.rotation} />
+                  )
+              }
+            </GridElement>
 
-        <GridElement column={1} row={2} />
-        <GridElement column={2} row={2} />
-        <GridElement column={3} row={2} />
-        <GridElement column={4} row={2} />
-        <GridElement column={5} row={2} />
+          ))
+        )
+      }
+    </InternalGridLayout>
+  </Wrapper>
+);
 
-        <GridElement column={1} row={3} />
-        <GridElement column={2} row={3} />
-        <GridElement column={3} row={3} />
-        <GridElement column={4} row={3} />
-        <GridElement column={5} row={3} />
-
-        <GridElement column={1} row={4} />
-        <GridElement column={2} row={4} />
-        <GridElement column={3} row={4} />
-        <GridElement column={4} row={4} />
-        <GridElement column={5} row={4} />
-
-        <GridElement column={1} row={5} />
-        <GridElement column={2} row={5} />
-        <GridElement column={3} row={5} />
-        <GridElement column={4} row={5} />
-        <GridElement column={5} row={5} />
-      </InternalGridLayout>
-    </Wrapper>
-  );
-};
-
-export default CommandLine;
+export default Grid;
