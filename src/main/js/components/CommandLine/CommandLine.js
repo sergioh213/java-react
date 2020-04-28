@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Controller from './Controller';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,6 +16,8 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  align-items: flex-end;
+  background-color: white;
 
   @media only screen and (max-width: 495px) {
     padding-right: 20px;
@@ -31,14 +34,6 @@ const Button = styled.button`
     font-size: 20px;
     border: 0px;
     cursor: pointer;
-`;
-const Input = styled.input`
-  background-color: #fff;
-  border-radius: 2px;
-  margin: 0;
-  height: 30px;
-  border: 0px;
-  width: 80%;
 `;
 const SubmitButton = styled.button`
     background-color: #f60;
@@ -108,7 +103,7 @@ const CommandLine = ({ onSubmit }) => {
     <Wrapper>
       {isOpen && (
         <ButtonWrapper>
-          <Input />
+          <Controller />
           <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
         </ButtonWrapper>
       )}
