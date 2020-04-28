@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from '../Logo/Logo';
 import CommandLine from '../CommandLine/CommandLine';
+import Grid from '../Grid/Grid';
 
 const Page = styled.div`
 	height: 100vh;
@@ -22,15 +23,6 @@ const ContentArea = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding: 30px 0px;
-`;
-const Grid = styled.div`
-	height: 80%;
-	width: 80%;
-	background-color: white;
-
-	@media only screen and (max-width: 495px) {
-    width: 100vw;
-  }
 `;
 const Footer = styled.div`
 
@@ -67,12 +59,7 @@ class App extends React.Component {
 				</NavBar>
 
 				<ContentArea>
-					{coordinates &&
-						<Grid>
-							<div>{'X: ' + coordinates.x}</div>
-							<div>{'Y: ' + coordinates.y}</div>
-						</Grid>
-					}
+					<Grid coordinates={coordinates} />
 					<CommandLine />
 				</ContentArea>
 
