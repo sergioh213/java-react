@@ -61,16 +61,16 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		// fetch('/api/position').then(response => response.json())
-		// 	.then(data => this.setState({ data }));
 		axios.get('/api/position')
 			.then(({ data }) => this.setState({ data }));
 	}
 
-	submitCommands(commands) {
-		debugger;
-		axios.post('/api/commands', commands)
-			.then(({ data }) => this.setState({ data }));
+	submitCommands(script) {
+		axios.post('/api/script', script)
+			.then(({ data }) => {
+				debugger;
+				this.setState({ data })
+			});
 	}
 
 	render() {
