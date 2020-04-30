@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Controller from './Controller';
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,18 +22,6 @@ const ButtonWrapper = styled.div`
     padding-right: 20px;
   }
 `;
-const Button = styled.button`
-    background-color: #f60;
-    font-weight: bold;
-    padding: 0 5px;
-    text-align: center;
-    color: white;
-    min-width: 120px;
-    height: 30px;
-    font-size: 20px;
-    border: 0px;
-    cursor: pointer;
-`;
 const SubmitButton = styled.button`
     background-color: #f60;
     font-weight: bold;
@@ -48,66 +35,35 @@ const SubmitButton = styled.button`
     cursor: pointer;
     width: 20%;
 `;
+const Input = styled.textarea`
+  border-radius: 2px;
+  margin: 0;
+  padding: 10px;
+  border: 0px;
+  width: 80%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+`;
 
-const initialCommands = [
-  {
-    // sets the position of the robot, pointing east
-    action: 'POSITION',
-    coordinates: {
-      x: 1,
-      y: 2,
-    }
-  },
-  {
-    // sets the robot pointing east
-    action: 'EAST',
-  },
-  {
-    // lets the robot do 3 steps forward
-    action: 'FORWARD',
-    value: 3
-  },
-  {
-    // lets the robot do nothing
-    action: 'WAIT',
-  },
-  {
-    // lets the robot turn around
-    action: 'TURNAROUND',
-  },
-  {
-    // lets the robot do 1 step forward
-    action: 'FORWARD',
-    value: 1
-  },
-  {
-    // lets the robot turn right
-    action: 'RIGHT',
-  },
-  {
-    // lets the robot do 2 steps forward
-    action: 'FORWARD',
-    value: 2
-  }
-];
+const script = `
+  POSITION 1 1 EAST //sets the position of the robot, pointing east
+  FORWARD 3 //lets the robot do 3 steps forward
+  WAIT //lets the robot do nothing
+  TURNAROUND //lets the robot turn around
+  FORWARD 1 //lets the robot do 1 step forward
+  RIGHT //lets the robot turn right
+  FORWARD 2 //lets the robot do 2 steps forward
+`;
 
 const CommandLine = ({ onSubmit }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [commands, setCommands] = useState(initialCommands);
-
-  const toggleIsOpen = () => setIsOpen(!isOpen);
-
-  const handleSubmit = () => onSubmit(commands);
-
+  const handleSubmit = () => onSubmit(script);
   return (
     <Wrapper>
-      {isOpen && (
-        <ButtonWrapper>
-          <Controller />
-          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
-        </ButtonWrapper>
-      )}
-      {!isOpen && <ButtonWrapper><Button onClick={toggleIsOpen}>Give commands</Button></ButtonWrapper>}
+      <ButtonWrapper>
+        <Input defaultValue={script} />
+        <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+      </ButtonWrapper>
     </Wrapper>
   );
 };
