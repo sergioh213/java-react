@@ -14,3 +14,5 @@ Run the integration (end-to-end) tests with the command:
 `npm run integration:test`
 
 This will also start the local server and do requests against it.
+
+To run only server unit tests, use the command: `./mvnw test`.
