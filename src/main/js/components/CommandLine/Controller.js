@@ -25,7 +25,7 @@ const ButtonsGrid = styled.div`
 const Button = styled.button`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center;  
   background-color: lightgrey;
   width: 36px;
   height: 36px;

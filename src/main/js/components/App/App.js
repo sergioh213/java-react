@@ -49,7 +49,7 @@ class App extends React.Component {
 
 		this.state = {
 			data: {
-				rotation: 90,
+				rotation: 0,
 				coordinates: {
 					x: 1,
 					y: 1
@@ -68,7 +68,6 @@ class App extends React.Component {
 	submitCommands(script) {
 		axios.post('/api/script', script)
 			.then(({ data }) => {
-				debugger;
 				this.setState({ data })
 			});
 	}

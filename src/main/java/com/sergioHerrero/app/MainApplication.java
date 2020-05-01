@@ -6,11 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-class Position {
-	public Coordinates coordinates = new Coordinates();
-	public int rotation = 0;
-}
-
 @SpringBootApplication
 @RestController
 public class MainApplication {
@@ -33,6 +28,8 @@ public class MainApplication {
 
 	private Position resolveNewPosition(String script) {
 		List<Command> commands = Script.scriptToCommands(script);
+
+		this.position = Position.newPositionFromCommands(this.position, commands);
 
 		return this.position;
 	}

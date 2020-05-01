@@ -10,17 +10,13 @@ const Wrapper = styled.div`
     width: 100vw;
   }
 `;
-const ButtonWrapper = styled.div`
+const ContentArea = styled.div`
   margin-top: 40px;
   display: flex;
   justify-content: flex-end;
   width: 100%;
   align-items: flex-end;
   background-color: white;
-
-  @media only screen and (max-width: 495px) {
-    padding-right: 20px;
-  }
 `;
 const SubmitButton = styled.button`
     background-color: #f60;
@@ -44,26 +40,31 @@ const Input = styled.textarea`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  resize: none;
+  height: 90px;
 `;
 
-const script = `
-  POSITION 1 1 EAST //sets the position of the robot, pointing east
-  FORWARD 3 //lets the robot do 3 steps forward
-  WAIT //lets the robot do nothing
-  TURNAROUND //lets the robot turn around
-  FORWARD 1 //lets the robot do 1 step forward
-  RIGHT //lets the robot turn right
-  FORWARD 2 //lets the robot do 2 steps forward
-`;
+const script = `POSITION 1 1 EAST //sets the position of the robot, pointing east
+FORWARD 3 //lets the robot do 3 steps forward
+WAIT //lets the robot do nothing
+TURNAROUND //lets the robot turn around
+FORWARD 1 //lets the robot do 1 step forward
+RIGHT //lets the robot turn right
+FORWARD 2 //lets the robot do 2 steps forward`;
 
 const CommandLine = ({ onSubmit }) => {
-  const handleSubmit = () => onSubmit(script);
+  const [value, setValue] = useState(script);
+
+  const handleSubmit = () => onSubmit(value);
+
+  const onChange = ({ target }) => setValue(target.value);
+
   return (
     <Wrapper>
-      <ButtonWrapper>
-        <Input defaultValue={script} />
+      <ContentArea>
+        <Input value={value} onChange={onChange} />
         <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
-      </ButtonWrapper>
+      </ContentArea>
     </Wrapper>
   );
 };

@@ -24,14 +24,6 @@ public class Script {
       formattedCommands.add(new Command(commands.get(i)));
     }
 
-    //  Just to log while WIP
-		System.out.println();
-		System.out.println("BUILT COMMANDS: ");
-		for (int i = 0; i < formattedCommands.size(); i++) {
-			System.out.println();
-			System.out.println(formattedCommands.get(i).toString());
-		}
-
     return formattedCommands;
   }
 
@@ -55,7 +47,7 @@ public class Script {
       String formatted = commands.get(i);
 
       // If a commend was found in the string, remove it
-      if ((indexOfComment > 0.0)) {
+      if ((indexOfComment >= 0.0)) {
         formatted = commands.get(i).substring(0, (int) indexOfComment);
       }
 
