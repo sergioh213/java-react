@@ -8,34 +8,23 @@ class Position {
   public Coordinates coordinates = new Coordinates();
   public int rotation = 0;
 
-  public Position() {}
-
-  public Position(Position position) {
-    this.coordinates = position.coordinates;
-    this.rotation = position.rotation;
-  }
-
-  public static Position newPositionFromCommands(Position previousPosition, List<Command> commands) {
-    Position finalPosition = new Position(previousPosition);
-
+  public static void updatePositionFromCommands(Position lastPosition, List<Command> commands) {
     for (int i = 0; i < commands.size(); i++) {
       Command currentCommand = commands.get(i);
 
       if (currentCommand.action.equals("POSITION")) {
-        finalPosition.coordinates =  currentCommand.coordinates;
+        lastPosition.coordinates = currentCommand.coordinates;
       }
 
-      finalPosition.handleRotation(currentCommand);
+      lastPosition.handleRotation(currentCommand);
 
       if (currentCommand.action.equals("WAIT")) {} // Here I would implement a delay.
 
-      finalPosition.move(currentCommand.action, currentCommand.value);
+      lastPosition.move(currentCommand.action, currentCommand.value);
     }
 
     // If the final position is outside of the grid's boundaries, bring respective coordinate to the closest one inside of the grid
-    finalPosition.bringIntoGridBoundaries();
-
-    return finalPosition;
+    lastPosition.bringIntoGridBoundaries();
   }
 
   private void handleRotation(Command currentCommand) {

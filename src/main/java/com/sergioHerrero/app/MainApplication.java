@@ -29,7 +29,7 @@ public class MainApplication {
 	private Position resolveNewPosition(String script) {
 		List<Command> commands = Script.scriptToCommands(script);
 
-		this.position = Position.newPositionFromCommands(this.position, commands);
+		Position.updatePositionFromCommands(this.position, commands);
 
 		return this.position;
 	}
