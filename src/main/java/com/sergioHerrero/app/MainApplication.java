@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.GenericSignatureFormatError;
 import java.util.List;
 
 @SpringBootApplication
@@ -27,10 +28,14 @@ public class MainApplication {
 	}
 
 	private Position resolveNewPosition(String script) {
-		List<Command> commands = Script.scriptToCommands(script);
+		try {
+			List<Command> commands = Script.scriptToCommands(script);
 
-		Position.updatePositionFromCommands(this.position, commands);
+			Position.updatePositionFromCommands(this.position, commands);
 
-		return this.position;
+			return this.position;
+		} catch (Exception e) {
+			return this.position;
+		}
 	}
 }
