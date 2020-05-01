@@ -18,14 +18,19 @@
   },
   "homepage": "https://github.com/sergioh213/java-react",
   "dependencies": {
+    "axios": "^0.19.2",
+    "concurrently": "^5.2.0",
+    "cypress": "v4.5.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "rest": "^1.3.1",
-    "styled-components": "^5.1.0",
-    "axios": "^0.19.2"
+    "styled-components": "^5.1.0"
   },
   "scripts": {
-    "watch": "webpack --watch -d"
+    "watch": "webpack --watch -d",
+    "start": "./mvnw spring-boot:run",
+    "cypress": "cypress open",
+    "integration:test": "concurrently \"npm run cypress\" \"npm run start\""
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
